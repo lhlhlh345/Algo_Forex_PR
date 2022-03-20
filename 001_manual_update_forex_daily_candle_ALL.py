@@ -12,7 +12,7 @@ from etl_init import DB_CONFIG
 from utils.database_util import connect
 from utils.database_util import truncate_table
 from utils.database_util import copy_from_dataFile_daily
-from utils.finnhub_util import get_forex_candles_daily
+from utils.finnhub_util import get_forex_candles
 from utils.notification_util import email_alert
 
 
@@ -59,7 +59,7 @@ for s in array:
     print ('Updating: ',s , '...........')
     
     try:
-        df_r = get_forex_candles_daily(s, interval, dt0, dt1)
+        df_r = get_forex_candles(s, interval, dt0, dt1)
         df_r = df_r.rename(columns={"c": "close_price", 
                                     "h": "high_price",
                                     "l": "low_price", 
@@ -109,6 +109,7 @@ body = f"The ETL job for refreshing forex_precious_metal_daily_jason_stage table
 
 if __name__ == '__main__':
     email_alert("Algo Trading ETL process update", body, "emailalertjasonlu900625@gmail.com ")
+
 
 
 

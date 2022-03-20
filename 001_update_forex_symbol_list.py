@@ -52,7 +52,7 @@ truncate_table(conn, 'forex_precious_metal_symbol_jason_stage')
 # Here I use execute_many() function because the amount of records is small
 query = "INSERT INTO %s(%s) VALUES(%%s,%%s,%%s,%%s,%%s)"
         
-execute_many(conn, df_r, 'forex_precious_metal_symbol_jason_stage', query)
+execute_many(conn, df_r, 'forex_symbol', query)
 
 # Close the connection
 conn.close()

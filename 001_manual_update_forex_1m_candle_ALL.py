@@ -6,7 +6,6 @@ import time
 import pandas as pd
 import datetime as dt
 from datetime import datetime
-from datetime import timedelta
 
 # Credential Parameters
 from etl_init import DB_CONFIG
@@ -15,7 +14,7 @@ from etl_init import DB_CONFIG
 from utils.database_util import connect
 from utils.database_util import truncate_table
 from utils.database_util import copy_from_dataFile_1m
-from utils.finnhub_util import get_forex_candles_1m
+from utils.finnhub_util import get_forex_candles
 from utils.notification_util import email_alert
 
 
@@ -44,14 +43,14 @@ existing_table = pd.DataFrame(tuples,columns=['Symbol'])
 # Convert the tuples to array, this is used in the FOR loop in next section
 array = existing_table[['Symbol']].to_numpy()
 
-# Truncate the forex_precious_metal_1m_jason_stage table
-truncate_table(conn, 'forex_precious_metal_1m_jason_stage')
+# Truncate the forex_precious_metal_daily_jason_stage table
+truncate_table(conn, 'forex_precious_metal_daily_jason_stage')
 
 
 # ==============================================Define the date ranges================================================
 
 # set the latest target date
-date_time_str = '02/03/22 00:00:00'
+date_time_str = '24/02/22 00:00:00'
 date_time = datetime.strptime(date_time_str, '%d/%m/%y %H:%M:%S')
 
 # define the date range
@@ -80,7 +79,7 @@ for dt0, dt1 in zip(dateList_unix, dateList_unix[1:]):
     for s in array:
         print ('Updating: ',s , '...........')
         try:
-            df_r = get_forex_candles_1m(s, interval, dt0, dt1)
+            df_r = get_forex_candles(s, interval, dt0, dt1)
             df_r = df_r.rename(columns={"c": "close_price", 
                                         "h": "high_price",
                                         "l": "low_price", 
@@ -98,8 +97,8 @@ for dt0, dt1 in zip(dateList_unix, dateList_unix[1:]):
             conn = connect(conn_params_dic)
             conn.autocommit = True
 
-            # Run the copy_from_dataFile method, here saving data into forex_precious_metal_1m_jason_stage
-            copy_from_dataFile_1m(conn, df_r, 'forex_precious_metal_1m_jason_stage')
+            # Run the copy_from_dataFile method, here saving data into forex_1m_candle
+            copy_from_dataFile_1m(conn, df_r, 'forex_precious_metal_daily_jason_stage')
 
             # My primium acount is 150 API calls/minute
             # Pause for 0.5 second
@@ -124,7 +123,7 @@ print('Time Elapsed: ', end - start)
 
 
 # ==========================================Send Email Alert Notification===================================================
-body = f"The ETL job for refreshing forex_precious_metal_1m_jason_stage table is completed on {dt.date.today().strftime('%Y/%m/%d')}," \
+body = f"The ETL job for refreshing forex_precious_metal_daily_jason_stage table is completed on {dt.date.today().strftime('%Y/%m/%d')}," \
        f" sending at {dt.datetime.now().strftime('%H:%M:%S.%f')} ," \
        f" and elapsed time is {Elapsed_Time} "
 

@@ -34,7 +34,7 @@ def get_forex_symbols():
 # ===============================================get_forex_candles===================================================
 
 ## Using 2nd Finnhub API KEY - used to load Finnhub daily candle data
-def get_forex_candles_daily(symbol, interval, start, end):
+def get_forex_candles(symbol, interval, start, end):
 
     try:
         finnhub_client = finnhub.Client(api_key=FINNHUB_CONFIG["finnhub_api_key_2"]) ### note: finnhub_api_key_2 is associated with premium account
@@ -52,51 +52,11 @@ def get_forex_candles_daily(symbol, interval, start, end):
         return pd.DataFrame()
 
     candles = pd.DataFrame(res)
-
-    if interval == 'D':
-        candles['ts'] = [dt.datetime.fromtimestamp(x) for x in candles['t']] #note: day candle returns GMT time at 12:00:00 AM
-    else:
-        candles['ts'] = [dt.datetime.fromtimestamp(x) for x in candles['t']] #note: 1 min candle returns NYC time
-    
+    candles['ts'] = [dt.datetime.fromtimestamp(x) for x in candles['t']] 
     candles['v'] = candles['v'].round().astype(int)
     x = np.char.replace(str(symbol), "['", '')
     t = np.char.replace(x, "']",'')
     candles['symbol'] = str(t)
   
     return candles
-
-
-
-## Using 2nd Finnhub API KEY - used to load Finnhub 1-min candle data
-def get_forex_candles_1m(symbol, interval, start, end):
-
-    try:
-        finnhub_client = finnhub.Client(api_key=FINNHUB_CONFIG["finnhub_api_key_2"])
-        res = finnhub_client.forex_candles(symbol, interval, start, end)
-    except FinnhubAPIException as err:
-        body = f"Error occurs during calling Finnhub /forex/candle/profile API - {err} for forex {symbol}"
-        print(body)
-        email_alert("Algo Trading ETL process update", body, "emailalertjasonlu900625@gmail.com")
-        return pd.DataFrame()
-
-    if res['s'] == 'no_data':
-        body = f"No data is available for {symbol} between {start} and {end}"
-        print(body)
-        email_alert("Algo Trading ETL process update", body, "emailalertjasonlu900625@gmail.com")
-        return pd.DataFrame()
-
-    candles = pd.DataFrame(res)
-
-    if interval == 'D':
-        candles['ts'] = [dt.datetime.utcfromtimestamp(x) for x in candles['t']] #note: day candle returns GMT time at 12:00:00 AM
-    else:
-        candles['ts'] = [dt.datetime.fromtimestamp(x) for x in candles['t']] #note: 1 min candle returns NYC time
-    
-    candles['v'] = candles['v'].round().astype(int)
-    x = np.char.replace(str(symbol), "['", '')
-    t = np.char.replace(x, "']",'')
-    candles['symbol'] = str(t)
-  
-    return candles    
-
 
