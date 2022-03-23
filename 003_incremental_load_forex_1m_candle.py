@@ -1,5 +1,4 @@
 
-
 # ===============================================Call Packages======================================================
 import os
 import time
@@ -16,7 +15,6 @@ from utils.database_util import connect
 from utils.database_util import copy_from_dataFile_1m
 from utils.finnhub_util import get_forex_candles
 from utils.notification_util import email_alert
-
 
 # ===============================================Load Database Parameters============================================
 conn_params_dic = {

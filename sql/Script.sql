@@ -49,6 +49,7 @@ select * from forex_precious_metal_1m_jason_stage where date(time_stamp_nyc) bet
 ---- delete 
 delete from forex_precious_metal_1m_jason_stage where date(time_stamp_nyc) between '2022-02-01' and '2022-03-20';
 
+delete from forex_precious_metal_1m_jason_stage where date(time_stamp_nyc) = '2022-03-21';
 
 
 
