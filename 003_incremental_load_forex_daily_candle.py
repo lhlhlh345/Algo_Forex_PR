@@ -202,10 +202,7 @@ print('Time Elapsed: ', end - start)
 
 
 # ==========================================Send Email Alert Notification===================================================
-msg = f"The ETL job for refreshing forex_precious_metal_daily_jason_stage table is completed on {dt.date.today().strftime('%Y/%m/%d')}. " \
-      f"Sending at {dt.datetime.now().strftime('%H:%M:%S.%f')}," \
-      f" and elapsed time is {Elapsed_Time}. " \
-      f"Update Message: {body} "
+msg = f"The ETL job for refreshing forex_precious_metal_daily_jason_stage table is completed on {dt.date.today().strftime('%Y/%m/%d')}. Sending at {dt.datetime.now().strftime('%H:%M:%S.%f')}, and elapsed time is {Elapsed_Time}. Update Message: {body}"
 
 
 if __name__ == '__main__':
