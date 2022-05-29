@@ -46,10 +46,10 @@ array = existing_table[['Symbol']].to_numpy()
 # ==============================================Define the date ranges================================================
 
 # set the target date range
-start_date_time_str = '01/02/22 00:00:00'
+start_date_time_str = '15/05/22 00:00:00'
 start_date_time = datetime.strptime(start_date_time_str, '%d/%m/%y %H:%M:%S')
 
-end_date_time_str = '17/03/22 00:00:00'
+end_date_time_str = '18/05/22 00:00:00'
 end_date_time = datetime.strptime(end_date_time_str, '%d/%m/%y %H:%M:%S')
 
 # define the date difference as integer

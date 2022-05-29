@@ -56,7 +56,7 @@ latest_daily_candle = cursor.fetchall()[0][0]
 
 # Get the latest trading time from EUR_USD
 now = datetime.now()
-now_240_hrs = now - timedelta(hours=240)
+now_240_hrs = now - timedelta(hours=24)
 # Convert to unix timestamp
 dt0_now_240_hrs = int(now_240_hrs.timestamp())
 dt1_now = int(now.timestamp())

@@ -14,10 +14,10 @@ select count(distinct forex_symbol) from forex_precious_metal_daily_jason_stage;
 
 select forex_symbol, count(1) as cnt from forex_precious_metal_daily_jason_stage group by forex_symbol;
 
---- delete from forex_precious_metal_daily_jason_stage where time_stamp_nyc = '2022-03-16 17:00:00.000'; 
+--- delete from forex_precious_metal_daily_jason_stage where time_stamp_nyc = '2022-05-18 17:00:00.000'; 
 
 -- check usd_cad
-select * from forex_precious_metal_daily_jason_stage where forex_symbol = 'OANDA:USD_CAD' order by time_stamp_nyc desc;
+select * from forex_precious_metal_daily_jason_stage where forex_symbol = 'OANDA:EUR_JPY' order by time_stamp_nyc desc;
 
 
 
@@ -47,9 +47,11 @@ select * from forex_precious_metal_1m_jason_stage where date(time_stamp_nyc) bet
 
 
 ---- delete 
-delete from forex_precious_metal_1m_jason_stage where date(time_stamp_nyc) between '2022-02-01' and '2022-03-20';
+delete from forex_precious_metal_1m_jason_stage where date(time_stamp_nyc) between '2022-05-15' and '2022-05-18';
 
-delete from forex_precious_metal_1m_jason_stage where date(time_stamp_nyc) = '2022-03-21';
+delete from forex_precious_metal_1m_jason_stage where date(time_stamp_nyc) = '2022-03-24';
+
+delete from forex_precious_metal_1m_jason_stage where date(time_stamp_nyc) = '2022-03-25';
 
 
 
