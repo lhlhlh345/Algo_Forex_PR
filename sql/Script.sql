@@ -39,7 +39,7 @@ select max(time_stamp_nyc), min(time_stamp_nyc) from forex_precious_metal_1m_jas
 select max(time_stamp_nyc), min(time_stamp_nyc) from forex_precious_metal_1m_jason_stage where forex_symbol = 'OANDA:USD_CAD';
 
 
-select * from forex_precious_metal_1m_jason_stage where date(time_stamp_nyc) between '2021-12-29' and '2022-01-03' and forex_symbol = 'OANDA:AUD_NZD'; 
+select * from forex_precious_metal_1m_jason_stage where date(time_stamp_nyc) between '2022-05-27' and '2022-05-28' and forex_symbol = 'OANDA:AUD_NZD' order by time_stamp_nyc desc; 
 
 
 select * from forex_precious_metal_1m_jason_stage where date(time_stamp_nyc) between '2021-12-29' and '2022-01-03' and forex_symbol = 'OANDA:USD_CAD'; 
