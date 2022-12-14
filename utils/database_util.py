@@ -68,7 +68,7 @@ def connect(conn_params_dic):
     except OperationalError as err:
         # passing exception to function
         show_psycopg2_exception(err)
-        email_alert("Algo Trading ETL process update", show_psycopg2_exception(err), "emailalertjasonlu900625@gmail.com")        
+        email_alert("Algo Trading ETL process update", show_psycopg2_exception(err), "TEST1@gmail.com")        
         # set the connection to 'None' in case of error
         conn = None
     return conn
@@ -92,7 +92,7 @@ def copy_from_dataFile(conn, df, table):
         os.remove(tmp_df)
         # pass exception to function
         show_psycopg2_exception(error)
-        email_alert("Algo Trading ETL process update", show_psycopg2_exception(error), "emailalertjasonlu900625@gmail.com")    
+        email_alert("Algo Trading ETL process update", show_psycopg2_exception(error), "TEST1@gmail.com")    
         cursor.close()
 
 
@@ -114,7 +114,7 @@ def copy_from_dataFile_daily(conn, df, table):
         os.remove(tmp_df)
         # pass exception to function
         show_psycopg2_exception(error)
-        email_alert("Algo Trading ETL process update", show_psycopg2_exception(error), "emailalertjasonlu900625@gmail.com")    
+        email_alert("Algo Trading ETL process update", show_psycopg2_exception(error), "TEST1@gmail.com")    
         cursor.close()
 
 
@@ -136,7 +136,7 @@ def copy_from_dataFile_1m(conn, df, table):
         os.remove(tmp_df)
         # pass exception to function
         show_psycopg2_exception(error)
-        email_alert("Algo Trading ETL process update", show_psycopg2_exception(error), "emailalertjasonlu900625@gmail.com")    
+        email_alert("Algo Trading ETL process update", show_psycopg2_exception(error), "TEST1@gmail.com")    
         cursor.close()
 
 
@@ -162,5 +162,5 @@ def execute_many(conn, datafrm, table, query):
     except (Exception, psycopg2.DatabaseError) as err:
         # pass exception to function
         show_psycopg2_exception(err)
-        email_alert("Algo Trading ETL process update", show_psycopg2_exception(err), "emailalertjasonlu900625@gmail.com")   
+        email_alert("Algo Trading ETL process update", show_psycopg2_exception(err), "TEST1@gmail.com")   
         cursor.close()

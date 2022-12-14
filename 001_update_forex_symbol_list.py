@@ -33,7 +33,7 @@ df_r = df_r[['id'] + [col for col in df_r.columns if col != 'id']]
 # Load Database Parameters
 conn_params_dic = {
     "host": DB_CONFIG['db_host'],
-    "port": 5555,
+    "port": 12345,
     "database": DB_CONFIG['db_name'],
     "user": DB_CONFIG['db_user'],
     "password": DB_CONFIG['db_pass']
@@ -45,14 +45,13 @@ conn.autocommit = True
 # Start Time
 start = time.time()
 
-# Truncate the forex_precious_metal_symbol_jason_stage table
-truncate_table(conn, 'forex_precious_metal_symbol_jason_stage')
+truncate_table(conn, '[YOUR SYMBOL TABLE]')
 
 # Run the execute_many method - Note that this controls the number of columns/fields in the database table
 # Here I use execute_many() function because the amount of records is small
 query = "INSERT INTO %s(%s) VALUES(%%s,%%s,%%s,%%s,%%s)"
         
-execute_many(conn, df_r, 'forex_symbol', query)
+execute_many(conn, df_r, '[YOUR SYMBOL TABLE]', query)
 
 # Close the connection
 conn.close()
@@ -66,12 +65,12 @@ print(end - start)
 
 
 # Send Email Alert Notification
-body = f"The ETL job for refreshing forex_precious_metal_symbol_jason_stage table is completed on {dt.date.today().strftime('%Y/%m/%d')}," \
+body = f"The ETL job for refreshing [YOUR SYMBOL TABLE] table is completed on {dt.date.today().strftime('%Y/%m/%d')}," \
        f" sending at {dt.datetime.now().strftime('%H:%M:%S.%f')} ," \
        f" and elapsed time is {Elapsed_Time} "
 
 if __name__ == '__main__':
-    email_alert("Algo Trading ETL process update", body, "emailalertjasonlu900625@gmail.com ")
+    email_alert("Algo Trading ETL process update", body, "TEST1@gmail.com ")
 
 
 

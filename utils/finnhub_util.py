@@ -21,7 +21,7 @@ def get_forex_symbols():
     except FinnhubAPIException as err:
         body = f"Error occurs during calling Finnhub /forex/candle/profile API - {err}"
         print(body)
-        email_alert("Algo Trading ETL process update", body, "emailalertjasonlu900625@gmail.com")
+        email_alert("Algo Trading ETL process update", body, "TEST1@gmail.com")
 
         return pd.DataFrame()
 
@@ -42,13 +42,13 @@ def get_forex_candles(symbol, interval, start, end):
     except FinnhubAPIException as err:
         body = f"Error occurs during calling Finnhub /forex/candle/profile API - {err} for forex {symbol}"
         print(body)
-        email_alert("Algo Trading ETL process update", body, "emailalertjasonlu900625@gmail.com")
+        email_alert("Algo Trading ETL process update", body, "TEST1@gmail.com")
         return pd.DataFrame()
 
     if res['s'] == 'no_data':
         body = f"No data is available for {symbol} between {start} and {end}"
         print(body)
-        email_alert("Algo Trading ETL process update", body, "emailalertjasonlu900625@gmail.com")
+        email_alert("Algo Trading ETL process update", body, "TEST1@gmail.com")
         return pd.DataFrame()
 
     candles = pd.DataFrame(res)

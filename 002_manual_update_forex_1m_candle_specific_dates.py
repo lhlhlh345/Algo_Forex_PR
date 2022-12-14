@@ -20,7 +20,7 @@ from utils.notification_util import email_alert
 # ===============================================Load Database Parameters============================================
 conn_params_dic = {
                     "host": DB_CONFIG['db_host'],
-                    "port": 5555,
+                    "port": 12345,
                     "database": DB_CONFIG['db_name'],
                     "user": DB_CONFIG['db_user'],
                     "password": DB_CONFIG['db_pass']
@@ -32,7 +32,7 @@ conn_params_dic = {
 conn = connect(conn_params_dic)
 cursor = conn.cursor()
 # Execute query - getting the list of all forex symbols:
-sql = "SELECT DISTINCT symbol FROM forex_precious_metal_symbol_jason_stage"
+sql = "SELECT DISTINCT symbol FROM [YOUR SYMBOL TABLE]"
 cursor.execute(sql)
 
 # Fetch all the records
@@ -95,8 +95,8 @@ for dt0, dt1 in zip(dateList_unix, dateList_unix[1:]):
             conn = connect(conn_params_dic)
             conn.autocommit = True
 
-            # Run the copy_from_dataFile method, here saving data into forex_precious_metal_1m_jason_stage
-            copy_from_dataFile_1m(conn, df_r, 'forex_precious_metal_1m_jason_stage')
+            # Run the copy_from_dataFile method, here saving data into [YOUR 1-MIN TABLE]
+            copy_from_dataFile_1m(conn, df_r, '[YOUR 1-MIN TABLE]')
 
             # My primium acount is 150 API calls/minute
             # Pause for 0.5 second
@@ -121,10 +121,10 @@ print('Time Elapsed: ', end - start)
 
 
 # ==========================================Send Email Alert Notification===================================================
-body = f"The ETL job for refreshing forex_precious_metal_1m_jason_stage table is completed on {dt.date.today().strftime('%Y/%m/%d')}," \
+body = f"The ETL job for refreshing [YOUR 1-MIN TABLE] table is completed on {dt.date.today().strftime('%Y/%m/%d')}," \
        f" sending at {dt.datetime.now().strftime('%H:%M:%S.%f')} ," \
        f" and elapsed time is {Elapsed_Time} "
 
 if __name__ == '__main__':
-    email_alert("Algo Trading ETL process update", body, "emailalertjasonlu900625@gmail.com ")
+    email_alert("Algo Trading ETL process update", body, "TEST1@gmail.com ")
 
