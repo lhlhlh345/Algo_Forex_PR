@@ -9,7 +9,7 @@
     1. Run "001_update_forex_symbol_list.py" to update the selected symbols.
     2. Run "001_manual_update_forex_1m_candle_ALL.py" and "001_manual_update_forex_daily_candle_ALL.py" to initiate the first-time data loading. Note that due to large volume of 1-min records, it takes days to load past 10-year data.
     3. If the data loading goes wrong, "002_manual_update_forex_1m_candle_specific_dates.py" is readily available to pull 1-min candles for specific dates. 
-    4. "003_incremental_load_forex_1m_candle.py" and "003_incremental_load_forex_daily_candle.py" can be used to run daily scheduled ETL processes. Suggested running time window is 20:15 - 11:45.
+    4. "003_incremental_load_forex_1m_candle.py" and "003_incremental_load_forex_daily_candle.py" can be used to run daily scheduled ETL processes. Suggested running time window is 20:15 - 23:45.
 ## File Description:
 - utils:
     - database_util.py: defining the functions of 
